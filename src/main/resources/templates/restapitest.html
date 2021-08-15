@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta charset="text/html; charset=UTF-8">
+</head>
+<body>
+    <div class="container">
+        <div class ="jumbotron">
+            <h1>Count Up Tutorial</h1>
+            <p>
+                <a id="count-up-btn" class="btn btn-lg btn-secondary" href="#"> count up</a>
+            </p>
+            <p id="count-field">???</p>
+
+            <h1>Add API Call Turtorial</h1>
+            <input type="text" class="form-control" id="addInput1" placeholder="Enter number">
+            <input type="text" class="form-control" id="addInput2" placeholder="Enter number">
+            <button id="add-btn" type="submit" class="btn btn-success">Add!</button>
+            <p id="add-result-field">???</p>
+        </div>
+        <div th:replace="fragments/footer :: footer" />
+    </div>
+</body>
+</html>

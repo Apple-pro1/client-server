@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta charset="text/html; charset=UTF-8">
+</head>
+<body>
+
+<div id="root-div" class="bg-image p-5 text-center shadow-1-strong rounded mb-5" style="background-image: url('img/background.png');">
+    <h1 class="mb-3 h2">Sign Up</h1>
+    <div class="container">
+        <p>Email</p>
+        <input type="email" class="form-control mb-4" id="emailInput" placeholder="Enter your email">
+        <p>Password</p>
+        <input type="password" class="form-control mb-4" id="passwordInput" placeholder="Enter password">
+        <p>Confirm Password</p>
+        <input type="password" class="form-control mb-4" id="confirmPasswordInput" placeholder="Enter password">
+        <button id="sign-up-btn" type="submit" class="btn btn-success btn-lg">Sign Up</button>
+    </div>
+</div>
+
+</body>
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+</script>
+</html>
