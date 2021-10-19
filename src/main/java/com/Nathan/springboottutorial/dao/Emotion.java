@@ -1,5 +1,6 @@
 package com.Nathan.springboottutorial.dao;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "emotion")
 @Getter @Setter
+@Builder
 public class Emotion {
     @Id @GeneratedValue
     @Column(name = "emotion_id")
@@ -21,6 +23,6 @@ public class Emotion {
     private String emotionType;
 
     @OneToMany(mappedBy = "emotion")
-    private List<EmotionPlaylist> emotionPlaylists = new ArrayList<>();
+    private List<EmotionPlaylist> emotionPlaylists;
 
 }

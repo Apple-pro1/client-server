@@ -9,7 +9,8 @@ spring:
     show-sql: true
     format-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
+#      ddl-auto: create
     properites:
       hibernate:
         show_sql: true

@@ -1,7 +1,6 @@
 package com.Nathan.springboottutorial.repository;
 
-import com.Nathan.springboottutorial.dao.Item;
-import com.Nathan.springboottutorial.dao.Song;
+import com.Nathan.springboottutorial.dao.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SongRepositoryTest {
     @Autowired
     SongRepository songRepository;
+
+    @Autowired
+    EmotionRepository emotionRepository;
+
+    @Autowired
+    PlaylistRepository playlistRepository;
+
+    @Autowired
+    EmotionPlaylistRepository emotionPlaylistRepository;
+
+
 
     @Test
     @Transactional
@@ -34,6 +44,70 @@ class SongRepositoryTest {
                 .isEqualTo("Ed Sheeran - Shape of You");
         assertThat(songRetrieved.getSongURL())
                 .isEqualTo("https://www.youtube.com/watch?v=JGwWNGJdvx8&list=PLAQ7nLSEnhWTEihjeM1I-ToPDJEKfZHZu");
+    }
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    void inputEmotionPlaylistRepository() {
+        Emotion emotion1 = emotionRepository.retrieve(21L);
+        Playlist playlist1 = playlistRepository.retrieve(1L);
+        EmotionPlaylist emotionPlaylist1 = EmotionPlaylist.builder()
+                .emotion(emotion1)
+                .playlist(playlist1)
+                .build();
+        emotionPlaylistRepository.create(emotionPlaylist1);
+
+        Emotion emotion2 = emotionRepository.retrieve(22L);
+        Playlist playlist2 = playlistRepository.retrieve(2L);
+        EmotionPlaylist emotionPlaylist2 = EmotionPlaylist.builder()
+                .emotion(emotion2)
+                .playlist(playlist2)
+                .build();
+        emotionPlaylistRepository.create(emotionPlaylist2);
+
+        Emotion emotion3 = emotionRepository.retrieve(23L);
+        Playlist playlist3 = playlistRepository.retrieve(3L);
+        EmotionPlaylist emotionPlaylist3 = EmotionPlaylist.builder()
+                .emotion(emotion3)
+                .playlist(playlist3)
+                .build();
+        emotionPlaylistRepository.create(emotionPlaylist3);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    void inputEmotions() {
+        emotionRepository.create(Emotion.builder()
+                .emotionId(null)
+                .emotionType("HAPPY")
+                .build());
+
+        emotionRepository.create(Emotion.builder()
+                .emotionId(null)
+                .emotionType("SAD")
+                .build());
+
+        emotionRepository.create(Emotion.builder()
+                .emotionId(null)
+                .emotionType("ANGRY")
+                .build());
+    }
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    void inputPlaylist() {
+        playlistRepository.create(Playlist.builder()
+                .songIds("1,2")
+                .build());
+        playlistRepository.create(Playlist.builder()
+                .songIds("3,4")
+                .build());
+        playlistRepository.create(Playlist.builder()
+                .songIds("5")
+                .build());
     }
 
     @Test

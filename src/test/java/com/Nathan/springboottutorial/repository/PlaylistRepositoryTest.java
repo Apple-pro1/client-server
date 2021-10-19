@@ -23,30 +23,19 @@ public class PlaylistRepositoryTest {
     @Transactional
     @Rollback(value = false)
     void saveAndFindTest() throws JsonProcessingException {
-        Playlist playlist = new Playlist();
-        playlist.setPlaylistTitle("default");
-        playlist.setSongsId("{\n" +
-                "   \"songIdList\":[\n" +
-                "      1,\n" +
-                "      2,\n" +
-                "      3,\n" +
-                "      4,\n" +
-                "      5,\n" +
-                "      6\n" +
-                "   ]\n" +
-                "}");
+        Playlist playlist = Playlist.builder()
+                .songIds("1,2")
+                .build();
 
         Long playlistId = playlistRepository.create(playlist);
         Playlist playlistRetrieved = playlistRepository.retrieve(playlistId);
 
 
         assertThat(playlistRetrieved).isNotNull();
-        assertThat(playlistRetrieved.getPlaylistTitle())
-                .isEqualTo("default");
-        String retrievedSongsId = playlistRetrieved.getSongsId();
+        String retrievedSongsId = playlistRetrieved.getSongIds();
         ObjectMapper objectMapper = new ObjectMapper();
-        SongIdList songIdList = objectMapper.readValue(retrievedSongsId, SongIdList.class);
-        int size = songIdList.getSongIdList().size();
+        SongIdList songIdsList = objectMapper.readValue(retrievedSongsId, SongIdList.class);
+        int size = songIdsList.getSongIdList().size();
         assertThat(size).isEqualTo(6);
     }
 }
